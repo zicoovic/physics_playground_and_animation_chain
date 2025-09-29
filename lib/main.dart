@@ -12,17 +12,24 @@ class MainApp extends StatefulWidget {
 
 class _MainAppState extends State<MainApp> {
   Set<String> completed = {};
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(title: Text('Physics Playground'), centerTitle: true),
+        appBar: AppBar(
+          title: Text('Physics Playground'),
+          centerTitle: true,
+          backgroundColor: Colors.deepPurple,
+          foregroundColor: Colors.white,
+          elevation: 0,
+        ),
         body: Padding(
           padding: EdgeInsets.all(20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+              SizedBox(height: 40),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -31,7 +38,7 @@ class _MainAppState extends State<MainApp> {
                   _buildDraggable('blue', Colors.blue),
                 ],
               ),
-
+              SizedBox(height: 60),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -40,22 +47,37 @@ class _MainAppState extends State<MainApp> {
                   _buildTarget('blue', Colors.blue),
                 ],
               ),
-
-              ElevatedButton(
+              SizedBox(height: 40),
+              ElevatedButton.icon(
                 onPressed: () => setState(() => completed.clear()),
-                child: Text('Reset'),
+                icon: Icon(Icons.refresh),
+                label: Text('Reset'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple,
+                  foregroundColor: Colors.white,
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                ),
               ),
-
+              SizedBox(height: 20),
               Builder(
                 builder: (context) {
-                  return TextButton(
-                    onPressed: () => Navigator.pushReplacement(
+                  return OutlinedButton.icon(
+                    onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => AnimationChainScreen(),
                       ),
                     ),
-                    child: Text("Press here to go to the Animation Chain"),
+                    icon: Icon(Icons.arrow_forward),
+                    label: Text("Go to Animation Chain"),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.deepPurple,
+                      side: BorderSide(color: Colors.deepPurple, width: 2),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 12,
+                      ),
+                    ),
                   );
                 },
               ),
